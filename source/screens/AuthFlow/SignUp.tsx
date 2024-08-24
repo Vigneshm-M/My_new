@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, TextInput, Image, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, TextInput, Image, StyleSheet, SafeAreaView, Pressable } from "react-native";
 import { AuthStackScreenPrpos } from "../../navigation/navigation";
 import { isStrongPassword,validateEmailAddress,validateMobileNumber } from "../../common";
 import { useToast } from "react-native-toast-notifications";
 import { signIn } from "../../service";
-import { PRIMARY_COLOR } from "../../config";
+import { PRIMARY_BACKGROUND_COLOR, PRIMARY_COLOR, PRIMARY_TEXT_COLOR } from "../../config";
 import Entypo from 'react-native-vector-icons/Entypo'
 import { UseDispatch, useDispatch } from "react-redux";
 import { loginAction } from "../../store/userAction";
@@ -25,9 +25,9 @@ interface SignUpProps extends AuthStackScreenPrpos {
   const dispatch = useDispatch()
 
   const doSignIn = async () => {
-    // dispatch(loginAction())
-    // navigation.navigate('Home')
-    // return
+    dispatch(loginAction())
+    navigation.navigate('Home')
+    return
     try{
 
        if(!name.length){
@@ -132,116 +132,54 @@ interface SignUpProps extends AuthStackScreenPrpos {
 
     return(
         <>
-
-      <View style={styles.text}>
-
-        <View style={styles.container}>
-          <TextInput
-            style={styles.input}
-            placeholder='name'
-            placeholderTextColor={PRIMARY_COLOR}
-            returnKeyType={'next'}
-            value={name}
-            keyboardType={'default'}
-            autoCapitalize="none"
-            onChangeText={(text) => setName(text)}
-          />
-        </View>
-
-        <View style={styles.container}>
-          <TextInput
-            style={styles.input}
-            placeholder='EmailOrPhone'
-            placeholderTextColor={PRIMARY_COLOR}
-            returnKeyType={'next'}
-            value={userEntry}
-            keyboardType={'default'}
-            autoCapitalize="none"
-            onChangeText={(text) => setUserEntry(text)}
-          />
-        </View>
-        {/* <View>{<Text style={{color:'red',fontSize:12}}>{errMeg}</Text>}</View> */}
-        <View style={styles.container}>
-          <TextInput
-            style={styles.input}
-            placeholder='Password'
-          placeholderTextColor={PRIMARY_COLOR}
-            returnKeyType={'done'}
-            secureTextEntry={showPassword}
-            value={password}
-            keyboardType={'default'}
-            autoCapitalize="none"
-            onChangeText={(text) => setPassword(text)}  
-          />
-          {/* <View style={{flex:0.1}}>
-                  {password !== '' && showPassword == true ? (
-                    <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}>
-                    <Entypo 
-                    name='eye'
-                    style={{color:'black',fontSize:20}}
-                    />
-                    </TouchableOpacity>
-                  ) : password !== '' && showPassword == false ? (
-                    <TouchableOpacity onPress={()=> setShowPassword(!showPassword)}>
-                    <Entypo
-                     name='eye-with-line'
-                     style={{color:'black',fontSize:20}}
-                    />
-                    </TouchableOpacity>
-                  ) : null}
-            </View> */}
-        </View>
-
-      </View>
-
-      <View>
-
-        <TouchableOpacity onPress={() => doSignIn()} style={styles.login}>
-          <Text
-            style={{ color: 'white', fontFamily: 'Poppins-Bold', fontSize: 15, textAlign: 'center' }}
-          >SIGNUP</Text>
-        </TouchableOpacity>
-      </View>
-
-
-      <View
-        style={{
-          flexDirection: 'row',
-          alignItems: 'center',
-          marginBottom: 10,
-          marginTop: 20,
-          marginLeft: 40,
-          marginRight: 40,
-        }}
-      >
-        <View style={{ flex: 1, height: 1, backgroundColor: 'gray' }} />
-        <Text style={{ marginHorizontal: 10, color: PRIMARY_COLOR, fontFamily:'Poppins-Bold' }}>Or</Text>
-        <View style={{ flex: 1, height: 1, backgroundColor: 'gray' }} />
-      </View>
-      <View
-
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          width: '80%',
-          marginBottom: 20,
-        }}>
-
-      </View>
-
-
-      <View style={styles.bottom}>
-
-        <View style={styles.signupContainer}>
-
-          <Text style={{ color: '#4D7CBC', paddingTop: 2 ,fontFamily:'Poppins-Medium'}}>Already have a Account</Text>
-
-          <TouchableOpacity onPress={()=> navigation.navigate("LoginPage")} style={styles.signupWrapper}>
-            <Text style={styles.signupText}>SignIn</Text>
-          </TouchableOpacity>
-
-        </View>
-      </View>
+        <SafeAreaView style={{flex:1,backgroundColor:PRIMARY_BACKGROUND_COLOR}}>
+           <View style={{flex:1,justifyContent:'center',alignItems:'center'}}>
+             <Text style={{color:PRIMARY_TEXT_COLOR,fontFamily:'Poppins-Bold',fontSize:25}}>SIGNUP</Text>
+             <View style={{backgroundColor:'#FFFFFF',width:"95%",height:50,borderRadius:15,marginTop:20}}>
+             <TextInput
+             placeholder="Enter Name"
+             placeholderTextColor={PRIMARY_TEXT_COLOR}
+             style={{fontFamily:'Poppins-Bold',fontSize:15}}
+             />
+             </View>
+             <View style={{backgroundColor:'#FFFFFF',width:"95%",height:50,borderRadius:15,marginTop:20}}>
+             <TextInput
+             placeholder="Enter Email"
+             placeholderTextColor={PRIMARY_TEXT_COLOR}
+             style={{fontFamily:'Poppins-Bold',fontSize:15}}
+             />
+             </View>
+             <View style={{backgroundColor:'#FFFFFF',width:"95%",height:50,borderRadius:15,marginTop:20}}>
+             <TextInput
+             placeholder="Enter Phone Number"
+             placeholderTextColor={PRIMARY_TEXT_COLOR}
+             style={{fontFamily:'Poppins-Bold',fontSize:15}}
+             />
+             </View>
+             <View style={{backgroundColor:'#FFFFFF',width:"95%",height:50,borderRadius:15,marginTop:20}}>
+             <TextInput
+             placeholder="Enter Password"
+             placeholderTextColor={PRIMARY_TEXT_COLOR}
+             style={{fontFamily:'Poppins-Bold',fontSize:15}}
+             />
+             </View>
+             <View style={{backgroundColor: PRIMARY_TEXT_COLOR,width:"90%",height:50,borderRadius:25,marginTop:20}}>
+                <Pressable onPress={()=> doSignIn()}>
+                  <Text style={{color:'#FFF',fontFamily:'Poppins-Bold',textAlign:'center',top:10,fontSize:15}}>SIGNUP</Text>
+                </Pressable>
+            </View>
+            <Text style={{color: PRIMARY_TEXT_COLOR,fontFamily:'Poppins-Regular',fontSize:15}}>Or</Text>
+            <View style={{flexDirection:'row',top:10}}>
+             <Text style={{color:PRIMARY_TEXT_COLOR,fontSize:15,fontFamily:'Poppins-Regular'}}>Already have a Account</Text>
+             <Pressable onPress={()=> navigation.navigate('LoginPage')}>
+             <Text style={{color:PRIMARY_TEXT_COLOR,fontSize:15,fontFamily:'Poppins-Bold,',textDecorationLine:'underline'}}>SignIn</Text>
+             </Pressable>
+             </View>
+            <View style={{justifyContent:'center',alignItems:'center',bottom:-110}}>
+            <Text style={{color:'gray',fontFamily:'Poppins-Regular',fontSize:10}}>Copyrights @ Avanexa Technologies.com 2024</Text>
+          </View>
+           </View>
+        </SafeAreaView>
 
         </>
     )

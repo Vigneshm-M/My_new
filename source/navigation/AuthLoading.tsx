@@ -17,7 +17,7 @@ const AuthLoadingScreen = () =>{
 					{isAuthenticated ? <HomeTab/> : <AuthNavigator/>}
 				</NavigationContainer>
 				</ToastProvider>
-	);
+	); 
 }
 
 export default  AuthLoadingScreen;
